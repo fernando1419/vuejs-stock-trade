@@ -1,6 +1,6 @@
 <template>
     <div>
-        <app-stock v-for="(stock, index) in stocks" :key="index" :stockData="stock"></app-stock>
+        <app-stock v-for="(stock, index) in callGetStocks" :key="index" :stockData="stock"></app-stock>
     </div>
 </template>
 
@@ -8,18 +8,13 @@
 import Stock from './Stock.vue'
 
 export default {
-    data: function() {
-        return {
-            stocks: [
-                {id: 1, name: 'Facebook', price: 500},
-                {id: 2, name: 'Google', price: 400},
-                {id: 3, name: 'Twitter', price: 300},
-                {id: 4, name: 'Whatsupp', price: 350}
-            ]
-        }
-    },
     components: {
         appStock: Stock
+    },
+    computed: {
+        callGetStocks() {
+            return this.$store.getters.getStocks;
+        }
     }
 }
 </script>
