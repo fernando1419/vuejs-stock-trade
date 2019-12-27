@@ -1,32 +1,32 @@
-import stocks from '../../data/stocks.js';
+import stocks from '../../data/stocks';
 
 const state = {
     stocks: []
 };
 
 const getters = {
-    getStocks: state => {
+    getStocks: (state: any) => {
         return state.stocks;
     }
 };
 
 const mutations = {
-    SET_STOCKS: function(state, stocks) {
+    SET_STOCKS: function(state: any, stocks: number) {
         state.stocks = stocks;
     },
-    RANDOM_STOCKS: (state) => {
+    RANDOM_STOCKS: (state: any) => {
 
     }
 };
 
 const actions = {
-    buyStock: function(context, order){
+    buyStock: function(context: any, order: object){
         context.commit();
     },
-    initializeStocks: function(context) {
+    initializeStocks: function(context: any) {
         context.commit('SET_STOCKS', stocks); // json data from ../../data/stocks
     },
-    randomizeStocks: ({commit}) => {
+    randomizeStocks: ({commit}: any) => {
         commit('RANDOM_STOCKS')
     }
 };
