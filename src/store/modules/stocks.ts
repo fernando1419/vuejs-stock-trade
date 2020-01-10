@@ -11,7 +11,7 @@ const getters = {
 };
 
 const mutations = {
-    SET_STOCKS: function(state: any, stocks: number) {
+    SET_STOCKS: function(state: any, stocks: any) {
         state.stocks = stocks;
     },
     RANDOM_STOCKS: (state: any) => {
@@ -20,8 +20,8 @@ const mutations = {
 };
 
 const actions = {
-    buyStock: function(context: any, order: object){
-        context.commit();
+    callPortfolioBuyStock: function(context: any, order: object){
+        context.commit('BUY_STOCK', order); // calls the mutation BUY_STOCK from portfolio module.
     },
     initializeStocks: function(context: any) {
         context.commit('SET_STOCKS', stocks); // json data from ../../data/stocks

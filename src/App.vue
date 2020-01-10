@@ -19,7 +19,6 @@ export default {
     },
     created() {
         this.$store.dispatch('initializeStocks');
-        this.$store.dispatch('callBayStocks', {stockId: 2, quantity: 50, stockPrice: 500});
     }
 }
 </script>
