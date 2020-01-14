@@ -8,20 +8,32 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <div class="pull-left">
-                    <input type="number" min="0" class="form-control" placeholder="Quantity" v-model="quantity">
+                <div class="pull-left" :class="insufficientFunds ? 'col-xs-6' : null ">
+                    <input  type="number" 
+                            class="form-control" 
+                            placeholder="Quantity" 
+                            v-model="quantity"
+                            :class="{danger: insufficientFunds}"
+                    >
                 </div>
                 <div class="pull-right">
                     <button 
                         class="btn btn-success" 
                         v-on:click="buyStock" 
-                        :disabled="quantity <= 0 || isNaN(quantity)"
-                    > Buy </button>
+                        :disabled="insufficientFunds || quantity <= 0 || isNaN(quantity)"
+                    > {{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }} 
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+    .danger {
+        border: 2px solid red;
+    }
+</style>
 
 <script>
 export default {
@@ -29,6 +41,14 @@ export default {
     data: function() {
         return {
             quantity: 0
+        }
+    },
+    computed: {
+        funds() {
+            return this.$store.getters.getFunds;
+        },
+        insufficientFunds() {
+            return this.quantity * this.stockData.price > this.funds;
         }
     },
     methods: {
