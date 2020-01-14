@@ -21,7 +21,7 @@
                         class="btn btn-success" 
                         v-on:click="buyStock" 
                         :disabled="insufficientFunds || quantity <= 0 || isNaN(quantity)"
-                    > {{ insufficientFunds ? 'Insufficient Funds' : 'Buy' }} 
+                    > {{ insufficientFunds ? 'Insufficient Funds!' : 'Buy' }} 
                     </button>
                 </div>
             </div>

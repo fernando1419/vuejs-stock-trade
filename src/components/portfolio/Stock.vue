@@ -8,23 +8,36 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <div class="pull-left">
-                    <input type="number" min="0" class="form-control" placeholder="Quantity" v-model="quantity">
+                <div class="pull-left" :class="insufficientQuantity ? 'col-xs-6' : null ">
+                    <input 
+                        type="number" 
+                        min="0" 
+                        class="form-control" 
+                        placeholder="Quantity" 
+                        v-model="quantity"
+                        :class="{danger: insufficientQuantity}"
+                    >
                 </div>
                 <div class="pull-right">
                     <button 
                         class="btn btn-info" 
                         v-on:click="sellStock" 
-                        :disabled="quantity <= 0 || isNaN(quantity)"
-                    > Sell </button>
+                        :disabled="insufficientQuantity || quantity <= 0 || isNaN(quantity)"
+                    > {{ insufficientQuantity ? 'Not enough stock!' : 'Sell' }} 
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 </template>
 
-<script>
+<style scoped>
+    .danger {
+        border: 2px solid red;
+    }
+</style>
 
+<script>
 import { mapActions } from 'vuex';
 
 export default {
@@ -32,6 +45,11 @@ export default {
     data: function() {
         return {
             quantity: 0
+        }
+    },
+    computed: {
+        insufficientQuantity() {
+            return this.quantity > this.stockData.quantity;
         }
     },
     methods: {
