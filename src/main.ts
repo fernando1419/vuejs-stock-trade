@@ -7,9 +7,9 @@ import VueResource from 'vue-resource';
 
 Vue.use(VueResource); // perform HTTP requests.
 
-Vue.http.options.root = 'https://vuejs-stock-trade-example.firebaseio.com/';
+(<any>Vue).http.options.root = 'https://vuejs-stock-trade-example.firebaseio.com/';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
 Vue.filter('currency', (value: number) => {
     return '$ ' + value.toLocaleString();

@@ -28,7 +28,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a href="#" @click="saveData">Save Data</a></li>
-                            <li><a href="#">Load Data</a></li>
+                            <li><a href="#" @click="loadData">Load Data</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -58,7 +58,8 @@ export default {
             'getStocks'
         ]),
         ...mapActions([
-            'randomizeStocks'
+            'randomizeStocks',
+            'fetchData'
         ]),
         endDay() {
             return this.randomizeStocks();
@@ -70,7 +71,11 @@ export default {
                 stockItems: this.getStocks()
             };
             // console.log(data);
+            console.log('Storing data to Firebase...');
             this.$http.put('stockTradeData.json', data);
+        },
+        loadData() {
+            this.fetchData();
         }
     }
 }
