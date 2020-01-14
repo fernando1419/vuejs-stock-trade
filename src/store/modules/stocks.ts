@@ -15,7 +15,9 @@ const mutations = {
         state.stocks = stocks;
     },
     RANDOM_STOCKS: (state: any) => {
-
+        state.stocks.forEach((element: any) => {
+            element.price = Math.round(element.price * (1 + Math.random() - 0.5)); // between 0.5 and 1.5
+        });
     }
 };
 
