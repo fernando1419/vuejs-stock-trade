@@ -26,7 +26,7 @@ const getters = {
 const mutations = {
     BUY_STOCK: function(state: any, {stockId, quantity, stockPrice}: any) { // recieves the order as parameter
         const record = state.stocks.find(function(element: any) {
-            return element.id = stockId;
+            return element.id == stockId;
         });
         if (record) { // stock found in array
             record.quantity += quantity;
